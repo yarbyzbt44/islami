@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>البنك الإسلامي الأردني</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap');
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Cairo', Arial, sans-serif;
+            background: radial-gradient(circle at 50% 0%, #d32f2f 0%, #b71c1c 100%);
+            position: relative;
+        }
+        .pattern {
+            pointer-events: none;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 100h400M0 200h400M0 300h400M100 0v400M200 0v400M300 0v400" stroke="rgba(255,255,255,0.08)" stroke-width="4"/></svg>');
+            background-size: cover;
+            z-index: 0;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 60px;
+        }
+        .logo {
+            margin-bottom: 20px;
+            width: 200px;
+        }
+        .title {
+            color: #fff;
+            font-size: 2.6rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .subtitle {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 36px;
+            font-weight: 400;
+            opacity: 0.85;
+        }
+        .main-btn {
+            width: 90vw;
+            max-width: 600px;
+            min-width: 240px;
+            padding: 28px 0;
+            margin: 0 auto 24px auto;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.6rem;
+            font-family: 'Cairo', Arial, sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
+            transition: box-shadow 0.2s;
+            box-shadow: 0 3px 16px 0 rgba(0,0,0,0.10);
+        }
+        .main-btn.activated {
+            background: #fff;
+            color: #f26522;
+        }
+        .main-btn.not-activated {
+            background: #f26522;
+            color: #fff;
+        }
+        /* Hide all views by default */
+        .view { display: none; }
+        .view.active { display: block; }
+
+        @media (max-width: 480px) {
+            .container {
+                padding-top: 30px;
+            }
+            .title {
+                font-size: 2rem;
+            }
+            .main-btn {
+                font-size: 1.1rem;
+                padding: 18px 0;
+                min-width: 140px;
+            }
+            .logo {
+                width: 130px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pattern"></div>
+    <div class="container">
+        <!-- Main Selection View -->
+        <div class="view active" id="mainView">
+            <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo">
+            <div class="title">البنك الإسلامي الأردني</div>
+            <div class="subtitle">عضو مجموعة البركة</div>
+            <button class="main-btn activated" onclick="showView('loginView')">لقد قمت بتفعيل حسابي على تطبيق البنك</button>
+            <button class="main-btn not-activated" onclick="showView('registerView')">لم اقوم بتفعيل حسابي على تطبيق البنك</button>
+        </div>
+        <!-- Login View (Like Image 2) -->
+        <div class="view" id="loginView">
+            <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo">
+            <div class="title">البنك الإسلامي الأردني</div>
+            <div class="subtitle">عضو مجموعة البركة</div>
+            <form style="width:90vw;max-width:600px;">
+                <div style="margin-bottom:18px;">
+                    <input type="text" placeholder="اسم المستخدم" style="width:100%;padding:20px 50px 20px 16px;font-size:1.1rem;border-radius:12px;border:none;background:#fff;margin-bottom:13px;box-sizing:border-box;box-shadow:0 1px 5px 0 rgba(0,0,0,0.08);font-family:'Cairo',Arial,sans-serif;outline:none;" />
+                    <span style="position:relative;right:-40px;top:-56px;float:left;font-size:1.3rem;color:#bbb;pointer-events:none;">
+                        <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#bbb" d="M12 12c2.7 0 8 1.35 8 4v2H4v-2c0-2.65 5.3-4 8-4zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                    </span>
+                </div>
+                <div style="margin-bottom:18px;">
+                    <input type="password" placeholder="كلمة المرور" style="width:100%;padding:20px 50px 20px 16px;font-size:1.1rem;border-radius:12px;border:none;background:#fff;margin-bottom:13px;box-sizing:border-box;box-shadow:0 1px 5px 0 rgba(0,0,0,0.08);font-family:'Cairo',Arial,sans-serif;outline:none;" />
+                    <span style="position:relative;right:-40px;top:-56px;float:left;font-size:1.3rem;color:#bbb;pointer-events:none;">
+                        <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#bbb" d="M12 17a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2zm6-4v-2A6 6 0 0 0 6 11v2"/></svg>
+                    </span>
+                </div>
+                <button type="submit" style="width:100%;padding:20px 0;font-size:1.2rem;background:#fff;color:#f26522;border:none;border-radius:12px;font-weight:bold;margin-bottom:20px;box-shadow:0 1px 8px 0 rgba(0,0,0,0.08);font-family:'Cairo',Arial,sans-serif;">تسجيل الدخول</button>
+                <div style="display:flex;justify-content:space-between;">
+                    <a href="#" style="color:#fff;text-decoration:underline;margin-right:8px;font-size:1rem;" onclick="showView('registerView');return false;">تفعيل الحساب</a>
+                    <a href="#" style="color:#fff;text-decoration:underline;font-size:1rem;">هل نسيت إسم المستخدم أو كلمة المرور ؟</a>
+                </div>
+            </form>
+        </div>
+        <!-- Register View (Like Image 3) -->
+        <div class="view" id="registerView" style="width:100%;">
+            <div style="background:#d32f2f;padding:15px 0 0 0;">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="margin-bottom:0;display:block;margin-right:auto;margin-left:auto;">
+                <div class="title" style="margin-bottom:0;font-size:1.3rem;">البنك الإسلامي الأردني</div>
+                <div class="subtitle" style="margin-bottom:0;">عضو مجموعة البركة</div>
+            </div>
+            <div style="background:#fff;padding:15px 0 0 0;border-top-left-radius:25px;border-top-right-radius:25px;margin-top:-7px;min-height:80vh;">
+                <div style="text-align:right;font-weight:700;font-size:1.2rem;margin:20px 32px 10px 0;">مستخدم جديد</div>
+                <form style="width:90vw;max-width:600px;margin:auto;">
+                    <input type="text" placeholder="رقم الحساب (7 خانات)*" style="width:100%;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;margin-bottom:13px;box-sizing:border-box;box-shadow:0 1px 5px 0 rgba(0,0,0,0.04);font-family:'Cairo',Arial,sans-serif;outline:none;" />
+                    <div style="display:flex;gap:10px;margin-bottom:13px;">
+                        <input type="text" value="+962" disabled style="width:80px;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;box-sizing:border-box;box-shadow:0 1px 5px 0 rgba(0,0,0,0.04);font-family:'Cairo',Arial,sans-serif;outline:none;" />
+                        <input type="text" placeholder="رقم الموبايل" style="flex:1;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;box-sizing:border-box;box-shadow:0 1px 5px 0 rgba(0,0,0,0.04);font-family:'Cairo',Arial,sans-serif;outline:none;" />
+                    </div>
+                    <select style="width:100%;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;margin-bottom:13px;box-sizing:border-box;font-family:'Cairo',Arial,sans-serif;outline:none;">
+                        <option>الأردن</option>
+                        <option>فلسطين</option>
+                        <option>السعودية</option>
+                    </select>
+                    <select style="width:100%;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;margin-bottom:13px;box-sizing:border-box;font-family:'Cairo',Arial,sans-serif;outline:none;">
+                        <option>نوع الوثيقة</option>
+                        <option>هوية وطنية</option>
+                        <option>جواز سفر</option>
+                    </select>
+                    <input type="text" placeholder="الرقم الوطني" style="width:100%;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;margin-bottom:13px;box-sizing:border-box;font-family:'Cairo',Arial,sans-serif;outline:none;" />
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:13px;">
+                        <button type="button" style="background:none;border:none;outline:none;cursor:pointer;">
+                            <svg width="30" height="30" viewBox="0 0 24 24"><path fill="#999" d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.39-.47 2.68-1.26 3.72l1.46 1.46A7.931 7.931 0 0 0 20 12c0-4.42-3.58-8-8-8zm-6.74 2.28L3.28 6.74A7.931 7.931 0 0 0 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3c-3.31 0-6-2.69-6-6 0-1.39.47-2.68 1.26-3.72z"></path></svg>
+                        </button>
+                        <div style="padding:10px 23px;border:1.5px solid #bcbcbc;background:#fafafa;border-radius:12px;font-size:1.2rem;font-family:'Cairo',Arial,sans-serif;letter-spacing:2px;">BBFAZ</div>
+                        <input type="text" placeholder="يرجى إدخال الرمز" style="flex:1;padding:18px;font-size:1.1rem;border-radius:12px;border:1.5px solid #bcbcbc;background:#fafafa;box-sizing:border-box;box-shadow:0 1px 5px 0 rgba(0,0,0,0.04);font-family:'Cairo',Arial,sans-serif;outline:none;" />
+                    </div>
+                    <div style="font-size:1.05rem;padding:10px 0 12px 0;">
+                        <span style="color:#f26522;font-weight:bold;">*</span> 
+                        تجدون رقم حساب المتعامل(7 خانات) في نص SMS للحركات المالية المرسلة من JIB المشار باللون الاحمر 000-<span style="color:#f00;">0000000</span> او الاتصال على 06/5680001 او مراجعة فرعك
+                    </div>
+                    <button type="submit" style="width:100%;padding:20px 0;font-size:1.2rem;background:#f26522;color:#fff;border:none;border-radius:12px;font-weight:bold;margin-bottom:20px;box-shadow:0 1px 8px 0 rgba(0,0,0,0.08);font-family:'Cairo',Arial,sans-serif;">تأكيد</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showView(view) {
+            document.querySelectorAll('.view').forEach(e => e.classList.remove('active'));
+            document.getElementById(view).classList.add('active');
+        }
+    </script>
+</body>
+</html>
